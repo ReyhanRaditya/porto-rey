@@ -624,7 +624,11 @@ html {
     
     /* 5. HERO & CTA */
     .hero-text{text-align:center}
-    .hero-img{order:-1;margin-bottom:1rem} 
+    .hero-img{
+      order:-1;
+      margin-bottom:1rem;
+      text-align:center;
+    } 
     .cta{justify-content:center}
     .stats{justify-content:center;gap:1.5rem;margin-top:1.5rem}
     
