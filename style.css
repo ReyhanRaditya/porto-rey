@@ -1,0 +1,667 @@
+:root{
+  --bg:#0f172a; --bg-dark:#0f2233; --accent1:#7c3aed; --accent2:#06b6d4;
+  --text:#f1f5f9; --muted:#94a3b8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+/* PERUBAHAN 1: Hapus background gradient dari sini */
+body{font-family:"Inter",sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+/* ==================================== */
+/* ORNAMEN BACKGROUND BODY */
+/* ==================================== */
+
+body {
+    /* Pastikan body adalah container relatif */
+    position: relative;
+    overflow-x: hidden; /* Mencegah scroll horizontal dari ornamen */
+
+    /* DITAMBAHKAN: Warna dasar sebagai cadangan */
+    background-color: var(--bg); 
+    
+    /* MODIFIKASI: Menggabungkan kedua gradient menjadi satu properti background */
+    background-image: 
+        /* Lapisan 1: Garis Diagonal Halus (di atas) */
+        repeating-linear-gradient(
+            -45deg, 
+            rgba(255, 255, 255, 0.03), 
+            rgba(255, 255, 255, 0.03) 1px, 
+            transparent 1px, 
+            transparent 15px 
+        ),
+        /* Lapisan 2: Gradient Gelap Utama (di bawah) */
+        linear-gradient(135deg,var(--bg),var(--bg-dark));
+
+    background-size: 30px 30px, 100% 100%; /* Ukuran pola garis, lalu ukuran layar penuh */
+    background-attachment: fixed; /* Menjaga background tetap saat scroll */
+    animation: backgroundMove 60s linear infinite; /* Animasi pergerakan lambat */
+}
+
+/* Keyframes untuk pergerakan garis yang sangat lambat */
+@keyframes backgroundMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 30px 30px; /* Pindahkan pola sebesar ukuran aslinya */
+    }
+}
+
+/* Ornamen 1: Bulat Besar di Kiri Atas */
+body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: -15%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.45) 0%, transparent 70%); /* Menggunakan accent1 */
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -1; /* Pastikan di bawah konten */
+    animation: glowMove1 15s infinite alternate ease-in-out;
+}
+
+/* Ornamen 2: Elips Kecil di Kanan Bawah */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -15%;
+    right: -10%;
+    width: 450px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(6, 182, 212, 0.4) 0%, transparent 65%); /* Menggunakan accent2 */
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1; /* Pastikan di bawah konten */
+    animation: glowMove2 12s infinite alternate-reverse ease-in-out;
+}
+
+/* Keyframes untuk Animasi Pergerakan Halus */
+@keyframes glowMove1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 50px) scale(1.05); }
+}
+
+@keyframes glowMove2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-80px, -40px) scale(1.1); }
+}
+
+/* Responsif: Mengurangi ukuran ornamen di layar kecil */
+@media(max-width: 900px) {
+    body::before {
+        width: 350px;
+        height: 350px;
+        left: -30%;
+        filter: blur(100px);
+    }
+    body::after {
+        width: 250px;
+        height: 150px;
+        right: -20%;
+        filter: blur(80px);
+    }
+}
+.container{width:92%;max-width:1100px;margin:0 auto}
+.navbar{position:fixed;top:0;left:0;width:100%;padding:0.9rem 0;background:rgba(15,23,42,0.65);backdrop-filter:blur(8px);z-index:100}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;font-size:1.2rem;color:var(--text);text-decoration:none}
+.nav-links{list-style:none;display:flex;gap:1rem}
+.nav-link{color:var(--muted);text-decoration:none;padding:.4rem .6rem;border-radius:6px}
+.nav-link {
+  /* ... kode yang sudah ada ... */
+  position: relative; /* Penting untuk pseudo-element */
+  padding: .4rem .6rem; 
+  /* Hapus padding-bottom agar garis tidak terlalu jauh */
+  padding-bottom: .6rem; 
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Letakkan di bawah teks */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after { /* Asumsikan Anda menambahkan kelas 'active' pada link saat ini */
+  width: 100%;
+  left: 0;
+}
+
+/* Biarkan hover text color */
+.nav-link:hover {
+  color: var(--text);
+  /* Hapus background hover jika Anda mau */
+  /* background: rgba(255,255,255,0.03); */
+}
+.nav-toggle{display:none;background:none;border:0;color:var(--text);font-size:1.4rem}
+
+/* hero */
+.hero{min-height:86vh;display:flex;align-items:center;padding-top:60px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.hero-text h1{font-size:2.5rem}
+.typing{color:var(--muted);margin:1rem 0}
+.cta{margin-top:1rem;display:flex;gap:1rem}
+.btn{
+  padding:.7rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  position:relative;
+  overflow:hidden;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  /* DITAMBAHKAN: outline: none; untuk dasar */
+  outline: none; 
+}
+.btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+.stats{display:flex;gap:2rem;margin-top:2rem}
+.stats span{font-size:1.4rem;color:var(--accent2);font-weight:700}
+/* Perbaikan sebelumnya untuk gambar hero */
+.hero-img img {
+  width: 100%;
+  border-radius: 20px; /* DITAMBAHKAN: Sudut membulat */
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  transition: transform .4s;
+}
+
+.hero-img img:hover {
+  transform: scale(1.02); /* Efek zoom sedikit saat hover */
+}
+/* Akhir perbaikan gambar hero */
+
+.section-title {
+  /* Ini akan memberikan jarak yang lebih lega antara judul dan konten grid */
+  margin-bottom: 2.5rem; 
+  text-align: center; /* Asumsikan Anda ingin judul berada di tengah */
+  font-size: 2rem;
+  position: relative;
+}
+
+/* about */
+.section{padding:4rem 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.about-img img{width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .4s}
+.about-img img:hover{transform:scale(1.03)}
+.about-content p{color:var(--muted);margin-bottom:1rem}
+.about-highlights{list-style:none;margin:1rem 0;padding:0}
+.about-highlights li{margin:.4rem 0;font-weight:500;display:flex;gap:.5rem;align-items:center}
+.about-highlights li::before{content:"✔";color:var(--accent2);font-weight:700;margin-right:8px}
+
+/* skills */
+.dark{background:var(--bg-dark);padding-top:2rem;padding-bottom:2rem}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.skill-card{background:rgba(255,255,255,0.04);padding:1rem 1.2rem;border-radius:12px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.06);transition:.3s;position:relative;overflow:hidden}
+.skill-card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 10px 25px rgba(0,0,0,.45)}
+.skill-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.skill-icon{font-size:1.5rem;margin-right:8px}
+.skill-header h4{flex:1;margin:0;font-size:1.05rem}
+.skill-percent{font-weight:700;color:var(--accent2);min-width:48px;text-align:right}
+.progress{height:14px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(270deg,var(--accent1),var(--accent2),var(--accent1));background-size:200% 100%;animation:gradientMove 4s linear infinite;transition:width 1.6s cubic-bezier(.2,.9,.2,1);border-radius:999px}
+@keyframes gradientMove{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
+/* portfolio */
+.filter-btns{text-align:center;margin-bottom:1.2rem}
+.filter-btn{margin:0 .4rem;padding:.45rem .9rem;border-radius:8px;border:1px solid var(--accent2);background:transparent;color:var(--accent2);cursor:pointer;transition:.25s}
+.filter-btn.active,.filter-btn:hover{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border-color:transparent}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.portfolio-card{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,.35)}
+.portfolio-card img{width:100%;display:block}
+.overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.6));display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:.35s;padding:1.2rem;text-align:center}
+.portfolio-card:hover .overlay{opacity:1}
+.btn-sm{padding:.45rem .8rem;border-radius:8px}
+
+/* timeline */
+.timeline{position:relative;margin:3rem 0}
+.timeline::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:3px;background:linear-gradient(180deg,var(--accent1),var(--accent2));background-size:200% 200%;animation:gradientFlow 6s linear infinite;transform:translateX(-50%)}
+@keyframes gradientFlow{0%{background-position:0% 0%}100%{background-position:0% 100%}}
+.timeline-item{position:relative;width:50%;padding:1.5rem 2rem}
+.timeline-item.left{left:0;text-align:right}
+.timeline-item.right{left:50%}
+.timeline-marker{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);width:40px;height:40px;background:linear-gradient(135deg,var(--accent1),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;box-shadow:0 0 15px rgba(0,0,0,0.5)}
+.timeline-content{
+  background: rgba(255,255,255,0.08); /* Sedikit lebih terang dari sebelumnya */
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--accent2); /* Border aksen yang lebih tegas */
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.2), 0 8px 25px rgba(0,0,0,0.4); /* Glow aksen */
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px); /* Efek melayang saat hover */
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.4), 0 12px 30px rgba(0,0,0,0.5); /* Glow yang lebih kuat */
+}
+
+/* contact */
+.contact-info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.contact-card{background:rgba(255,255,255,0.04);border-radius:12px;padding:1rem;text-align:center;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(8px)}
+.contact-icon{font-size:1.4rem;margin-bottom:.5rem;display:block}
+.social-links{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;justify-items:center;margin-top:.8rem}
+.social-links a:nth-child(3){grid-column:1 / -1;justify-self:center}
+.social-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);text-decoration:none;color:var(--text);transition:.25s;min-width:140px;justify-content:center}
+.social-btn i{font-size:1.1rem;margin-right:.3rem}
+
+/* CONTACT visual enhancement */
+
+.contact-card{
+  /* Perubahan visual utama */
+  background: rgba(255,255,255,0.06); /* Lebih menonjol */
+  border: 1px solid var(--accent1); /* Border accent */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2), 0 0 10px var(--accent2); /* Efek glow ringan */
+  transition: transform .3s, box-shadow .3s;
+  height: 100%; /* Pastikan semua kartu memiliki tinggi yang sama */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 15px var(--accent1); /* Hover effect */
+}
+
+.contact-icon{
+  font-size: 2.2rem; /* Ikon lebih besar */
+  color: var(--accent2); /* Warna accent */
+  margin-bottom: 0.8rem;
+}
+
+.contact-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.contact-card a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-card a:hover {
+  color: var(--accent2);
+}
+
+/* New Social Links Style */
+.social-links-new {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.social-icon-btn {
+  font-size: 1.8rem; /* Ikon sosial lebih besar */
+  color: var(--muted);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-icon-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.social-icon-btn.linkedin:hover {
+  color: #0A66C2;
+}
+.social-icon-btn.instagram:hover {
+  color: #E1306C;
+}
+.social-icon-btn.tiktok:hover {
+  color: #69C9D0;
+}
+
+/* Hapus style social-links lama yang tidak terpakai */
+.social-links { display: none; } /* Nonaktifkan gaya lama */
+.social-btn { display: none; } /* Nonaktifkan gaya lama */
+/* Hapus grid-template columns untuk sosial lama */
+/* .social-links a:nth-child(3){grid-column:1 / -1;justify-self:center} <- Hapus ini jika di tempatkan di sini */
+
+/* Sesuaikan tampilan untuk kartu sosial yang baru */
+.contact-card.social-card {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Responsif: Pastikan kartu sosial baru tidak memiliki margin top berlebih di mobile */
+@media(max-width:900px){
+  .contact-card.social-card {
+    margin-top: 1rem !important; /* Memastikan margin tidak berlebihan di mobile */
+  }
+}
+
+/* contact cta */
+.contact-cta{display:flex;justify-content:center;gap:1.2rem;margin-top:1.5rem;flex-wrap:wrap}
+.contact-cta .btn{width:220px;text-align:center;padding:.9rem 1.2rem;border-radius:50px}
+
+/* footer */
+.footer{text-align:center;padding:1.2rem 0;color:var(--muted);margin-top:2rem}
+
+/* reveal */
+.reveal-up,.reveal-left,.reveal-right,.reveal-float{opacity:0;transform:translateY(20px);transition:all .8s}
+.reveal-up.active,.reveal-left.active,.reveal-right.active,.reveal-float.active{opacity:1;transform:none}
+.delay-1{transition-delay:.12s}.delay-2{transition-delay:.24s}.delay-3{transition-delay:.36s}
+
+/* swiper + lightbox helpers */
+.swiper{width:100%;max-width:1000px;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.5);margin:0 auto}
+.swiper-slide img{width:100%;display:block;border-radius:12px}
+.glightbox-clean .gslide-title{font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
+.glightbox-clean .gslide-description{font-size:0.95rem;color:#bbb;line-height:1.5}
+
+/* responsive */
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.timeline::before{left:20px}.timeline-item,.timeline-item.left,.timeline-item.right{width:100%;left:0;text-align:left;padding-left:3.5rem}.timeline-marker{left:20px;transform:none}.about-grid{grid-template-columns:1fr}.social-links{grid-template-columns:1fr;grid-auto-rows:auto}.contact-cta .btn{width:100%} .nav-links{display:none}.nav-toggle{display:block} }
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-image: linear-gradient(var(--bg-dark), var(--bg-dark)), 
+                    linear-gradient(90deg, var(--accent1), var(--accent2));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  color: #fff;
+  transition: 0.3s;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-image: linear-gradient(90deg, var(--accent1), var(--accent2)), 
+                    linear-gradient(90deg, var(--accent1), var(--accent2));
+}
+
+.logo {
+  /* ... kode yang sudah ada ... */
+  display: inline-block;
+  padding: 0.2rem 0;
+  /* Efek glow/neon */
+  text-shadow: 0 0 5px var(--accent2), 0 0 10px var(--accent1);
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  /* Sedikit lebih terang saat hover */
+  color: #fff;
+  text-shadow: 0 0 8px var(--accent2), 0 0 15px var(--accent1);
+  transform: translateY(-1px); /* Gerakan kecil saat hover */
+}
+/* Di bagian Navbar */
+.nav-links{list-style:none;display:flex;gap:1rem; align-items: center;} /* Tambahkan align-items: center */
+
+.nav-cta-item {
+    /* Hanya tampilkan tombol di desktop */
+    margin-left: 0.5rem; /* Beri sedikit jarak */
+}
+
+/* Pastikan tombol di navbar lebih kecil */
+.nav-cta-btn {
+    padding: .5rem 1rem; /* Ukuran yang pas untuk navbar */
+    font-size: 0.9rem;
+}
+
+/* Responsif: sembunyikan tombol CTA di mobile untuk menggunakan toggle menu */
+@media(max-width:900px){
+    /* ... kode responsif lainnya ... */
+    .nav-cta-item {
+        display: none; /* Sembunyikan tombol CTA di mobile */
+    }
+    
+    /* Perlu juga menyesuaikan bagaimana menu mobile Anda ditampilkan */
+}
+
+/* ==================================== */
+/* PERBAIKAN FOKUS TOMBOL & RIPPLE */
+/* ==================================== */
+
+/* Tambahkan Gaya untuk Elemen Ripple yang Dibuat oleh JavaScript */
+.ripple-circle {
+  position: absolute; 
+  background: rgba(255, 255, 255, 0.4); 
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none; 
+  z-index: 1; 
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4); 
+    opacity: 0;
+  }
+}
+
+/* Perbaikan Terakhir untuk Menghilangkan Outline/Shadow/Border Bawaan */
+.btn:focus,
+.btn:active,
+.btn-secondary:focus,
+.btn-secondary:active,
+a.btn:focus,
+a.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+/* Tambahkan di akhir file style.css */
+
+/* ==================================== */
+/* VIDEO PLAY ICON OVERLAY */
+/* ==================================== */
+
+/* Container untuk memastikan ikon terpusat */
+.project-video-link {
+    position: relative;
+    display: block; /* Agar link memenuhi ruang slide */
+    line-height: 0; /* Menghilangkan margin bawah gambar yang sering terjadi */
+}
+
+/* Icon Play */
+.video-play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem; /* Ukuran ikon yang besar */
+    color: rgba(255, 255, 255, 0.7); /* Warna putih semi-transparan */
+    opacity: 0.9;
+    cursor: pointer;
+    z-index: 5; /* Pastikan di atas gambar */
+    transition: all 0.3s ease;
+    
+    /* Efek glow */
+    text-shadow: 0 0 15px var(--accent1), 0 0 20px var(--accent2);
+}
+
+/* Efek saat hover pada seluruh link */
+.project-video-link:hover .video-play-icon {
+    color: rgba(255, 255, 255, 1); /* Lebih solid */
+    font-size: 4.5rem; /* Sedikit membesar */
+    opacity: 1;
+}
+
+/* Opsi: Tambahkan overlay gelap pada gambar saat hover */
+.project-video-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s ease;
+    border-radius: 12px; /* Sesuaikan dengan border-radius swiper */
+    z-index: 4;
+}
+
+.project-video-link:hover::after {
+    background: rgba(0, 0, 0, 0.3); /* Tambahkan overlay gelap saat hover */
+}
+
+/* Pastikan gambar di slide memiliki border-radius */
+.swiper-slide img {
+  /* ... kode yang sudah ada ... */
+  border-radius: 12px;
+}
+/* ==================================== */
+/* STYLING LIST DALAM TIMELINE EXPERIENCE (lanjutan) */
+/* ==================================== */
+
+/* Menyesuaikan LI yang berisi deskripsi pekerjaan */
+#experience .timeline-content ul li {
+    /* Menggunakan font Inter yang sudah modern (sudah ada di body) */
+    font-family: "Poppins", sans-serif; 
+    
+    /* 1. Ketebalan (Weight): Mengurangi ketebalan agar kontras dengan judul */
+    font-weight: 400; /* Normal */
+    
+    /* 2. Ukuran (Size): Biasanya sedikit lebih kecil dari font normal */
+    font-size: 0.95rem; 
+    
+    /* 3. Warna (Color): Menggunakan warna 'muted' agar lebih lembut/visual dari judul */
+    color: var(--muted); 
+    
+    /* 4. Kerapian Baris */
+    line-height: 1.7; /* Menambah jarak baris agar lebih lega */
+
+    /* Jarak antar poin */
+    margin-bottom: 0.6rem;
+}
+
+/* Jika Anda ingin bintik hitam (disc) terlihat menonjol: */
+#experience .timeline-content ul li::marker {
+    color: var(--accent2); /* Mengubah warna bintik hitam menjadi warna aksen (biru muda) */
+    font-size: 1rem; /* Bintik sedikit lebih besar */
+}
+
+/* Aturan UL sebelumnya (dari langkah 1) tetap diperlukan */
+#experience .timeline-content ul.experience-list {
+    margin-top: 0.5rem; 
+    margin-bottom: 0;
+    list-style-type: disc; 
+    padding-left: 20px; 
+    color: var(--muted); /* Menggunakan warna muted untuk list container */
+}
+html {
+  overflow-y: scroll; /* Pastikan scrollbar muncul hanya jika diperlukan */
+}
+
+/* ==================================== */
+/* 10. MEDIA QUERIES (HANYA UNTUK MOBILE/TABLET DI BAWAH 1100px) */
+/* ==================================== */
+
+@media(max-width:1100px){
+    /* Tata Letak Timeline untuk Tablet */
+    .timeline::before{
+        left:20px;
+    }
+    .timeline-item, .timeline-item.left, .timeline-item.right{
+        width:100%;
+        left:0;
+        text-align:left;
+        padding-left:3.5rem; 
+    }
+    .timeline-marker{
+        left:18px; 
+        transform:none;
+        right: auto;
+    }
+    .timeline-item.right .timeline-marker{
+        left:18px;
+    }
+}
+
+@media(max-width:900px){
+    
+    /* 1. CONTAINER & PADDING */
+    .section{padding:3rem 0} 
+    .container{width:95%;padding:0 15px} 
+    .section-title{font-size:2rem;margin-bottom:2rem}
+    
+    /* 2. TIPOGRAFI */
+    h1{font-size:2.2rem}
+    .typing{font-size:1.2rem}
+    
+    /* 3. NAVBAR (Mobile Menu Activation) */
+    .nav-links{display:none} 
+    .nav-toggle{display:block} 
+    
+    /* Tampilan menu saat aktif (diklik) */
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-dark); 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 99;
+    }
+    .nav-link::after { 
+        display: none;
+    }
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    /* 4. TATA LETAK GRID (1 KOLOM UNTUK MOBILE) */
+    .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+    .about-grid{grid-template-columns:1fr;gap:2rem}
+    .skills-grid, .portfolio-grid, .contact-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 5. HERO & CTA */
+    .hero-text{text-align:center}
+    .hero-img{order:-1;margin-bottom:1rem} 
+    .cta{justify-content:center}
+    .stats{justify-content:center;gap:1.5rem;margin-top:1.5rem}
+    
+    /* 6. ABOUT SECTION */
+    .about-img{text-align:center}
+    .social-links{grid-template-columns:repeat(2, 1fr);justify-items:center} 
+    
+    /* 7. ORNAMEN BACKGROUND */
+    body::before {
+        width: 300px;
+        height: 300px;
+        left: -40%;
+        filter: blur(80px);
+    }
+    body::after {
+        width: 200px;
+        height: 200px;
+        right: -40%;
+        filter: blur(60px);
+    }
+    
+    /* 8. PROJECT PAGES */
+    .project-hero {
+        padding-top: 5rem; 
+    }
+    .project-hero h1 {
+        font-size: 2rem;
+    }
+    .project-info {
+        margin: 1.5rem auto 3rem auto;
+    }
+}
+
+/* Batasan paling kecil untuk HP */
+@media(max-width:450px){
+    .cta{flex-direction:column;gap:0.75rem}
+    .btn{width:100%;text-align:center}
+    .stats{flex-direction:column;gap:1rem}
+    .hero-img img{width:100%;max-width:250px}
+}
