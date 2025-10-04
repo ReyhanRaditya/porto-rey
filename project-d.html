@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Project Campaign — Ads Report</title>
+  <link rel="icon" type="image/jpeg" href="assets/rey.png" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+</head>
+<body>
+  <main>
+    <section class="project-hero">
+      <style>
+        /* CSS Tambahan untuk Tombol Detail di Tengah */
+        .project-hero {
+          padding-top: 50px;
+        }
+
+        .project-slide-content {
+          position: relative; /* Agar overlay dan tombol dapat diposisikan absolut */
+          overflow: hidden; /* Penting untuk menjaga border-radius */
+          border-radius: 12px;
+          line-height: 0;
+        }
+
+        .project-slide-content img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+            transition: filter 0.3s ease;
+        }
+
+        .overlay-button {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(0, 0, 0, 0.5); /* Overlay gelap */
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .project-slide-content:hover .overlay-button {
+          opacity: 1; /* Munculkan overlay saat hover */
+        }
+
+        .overlay-button .btn-detail {
+          /* Menggunakan btn-primary dari style.css dengan modifikasi */
+          background: linear-gradient(90deg,var(--accent1),var(--accent2));
+          color: #fff;
+          padding: 1rem 2.5rem; /* Ukuran tombol lebih besar */
+          font-size: 1.1rem;
+          transform: scale(0.8); /* Mulai dari kecil */
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          border-radius: 50px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .project-slide-content:hover .overlay-button .btn-detail {
+          transform: scale(1); /* Membesar saat hover */
+          box-shadow: 0 0 20px var(--accent2), 0 0 30px var(--accent1);
+        }
+
+        .project-slide-content:hover img {
+            filter: brightness(0.7); /* Gambar sedikit gelap saat hover */
+        }
+
+      </style>
+      <div class="container">
+        <h1>Project Campaign</h1>
+        <p class="muted">Ads Management • 2023 - 2025</p>
+      </div>
+    </section>
+
+    <section class="project-gallery section">
+      <div class="container">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="project-slide-content">
+                <img src="CMPN/CMP.png" alt="Project C 1">
+                <div class="overlay-button">
+                  <a href="CMPN/Porto_Campaign.pdf" class="btn btn-primary ripple btn-detail" target="_blank">View Detail</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="container">
+        <div class="contact-cta">
+          <a href="index.html#portfolio" class="btn btn-secondary">⬅ Back to Portfolio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper', { loop:true, pagination:{ el:'.swiper-pagination', clickable:true }, navigation:{ nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' } });
+    const lightbox = GLightbox({ selector: '.glightbox' });
+  </script>
+</body>
+</html>

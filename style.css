@@ -221,6 +221,14 @@ body::after {
 .portfolio-card:hover .overlay{opacity:1}
 .btn-sm{padding:.45rem .8rem;border-radius:8px}
 
+/* MODIFIKASI TATA LETAK PORTFOLIO */
+.portfolio-full-width {
+    grid-column: 1 / -1; 
+    justify-self: center; 
+    width: 100%; 
+    max-width: 450px; 
+}
+
 /* timeline */
 .timeline{position:relative;margin:3rem 0}
 .timeline::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:3px;background:linear-gradient(180deg,var(--accent1),var(--accent2));background-size:200% 200%;animation:gradientFlow 6s linear infinite;transform:translateX(-50%)}
@@ -335,7 +343,7 @@ body::after {
 }
 
 /* Responsif: Pastikan kartu sosial baru tidak memiliki margin top berlebih di mobile */
-@media(max-width:900px){
+@media(max-width:900px) {
   .contact-card.social-card {
     margin-top: 1rem !important; /* Memastikan margin tidak berlebihan di mobile */
   }
@@ -579,6 +587,12 @@ html {
 
 @media(max-width:900px){
     
+    /* MODIFIKASI TATA LETAK PORTFOLIO (RESPONSIVE) */
+    .portfolio-full-width {
+        grid-column: auto; /* Kembali ke auto-fit 1 kolom */
+        max-width: 100%; /* Gunakan lebar penuh */
+    }
+
     /* 1. CONTAINER & PADDING */
     .section{padding:3rem 0} 
     .container{width:95%;padding:0 15px} 
